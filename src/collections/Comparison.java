@@ -41,7 +41,7 @@ public class Comparison {
     private static void calculateAndWriteRemoveOperationTime(List<Class<? extends Collection>> collections, FileWriter fw) throws IOException {
         System.out.println("Calculating removing time...");
         writeHeaders(collections, "REMOVE operation", fw);
-        int iterations = 1000;
+        int iterations = 100;
 
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < SIZES.length; ++i) {
@@ -62,7 +62,7 @@ public class Comparison {
     private static void calculateAndWriteContainsOperationTime(List<Class<? extends Collection>> collections, FileWriter fw) throws IOException {
         System.out.println("Calculating contains time...");
         writeHeaders(collections, "CONTAINS operation", fw);
-        int iterations = 1_0_000;
+        int iterations = 100;
 
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < SIZES.length; ++i) {
@@ -83,7 +83,7 @@ public class Comparison {
     private static void calculateAndWriteAdditionTime(Collection<Class<? extends Collection>> collections, FileWriter fw) throws IOException {
         System.out.println("Calculating addition time...");
         writeHeaders(collections, "ADD operation", fw);
-        int iterations = 500;
+        int iterations = 50;
 
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < SIZES.length; ++i) {
@@ -182,17 +182,20 @@ public class Comparison {
         Collection<Integer> collection;
         double[] times = new double[iterations];
 
-        for (int i = 0; i < iterations; ++i) {
+
             collection = getNewCollectionInstance(cl);
             for (int j = 0; j < size; ++j) {
                 Integer val = rnd.nextInt(upperBound - Comparison.LOW_BOUND) + Comparison.LOW_BOUND;
-
-                start = System.nanoTime();
                 collection.add(val);
-                end = System.nanoTime();
-                long time = end - start;
-                times[i] += time;
             }
+
+        for (int i = 0; i < iterations; ++i) {
+            Integer val = rnd.nextInt(upperBound - Comparison.LOW_BOUND) + Comparison.LOW_BOUND;
+            start = System.nanoTime();
+            collection.add(val);
+            end = System.nanoTime();
+            long time = end - start;
+            times[i] += time;
             times[i] = times[i] / 1_000;
         }
 

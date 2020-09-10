@@ -39,7 +39,7 @@ class LimitedArrayListTest {
         assertDoesNotThrow(() -> new LimitedArrayList<Integer>(list.subList(0, maxSize - 1)));
         assertDoesNotThrow(() -> new LimitedArrayList<Integer>(list.subList(0, maxSize)));
 
-        assertThrows(TooLargeSizeOfCollection.class, () -> new LimitedArrayList(list.subList(0, maxSize + 1)));
+        assertThrows(TooLargeSizeOfCollection.class, () -> new LimitedArrayList<Integer>(list.subList(0, maxSize + 1)));
     }
 
     @Test

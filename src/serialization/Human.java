@@ -22,12 +22,10 @@ public class Human implements Serializable {
         this.activity = defineActivity(age);
     }
 
-
     private void readObject(ObjectInputStream ois) throws IOException, ClassNotFoundException {
         ois.defaultReadObject();
         this.activity = defineActivity(this.age);
     }
-
 
     private void writeObject(ObjectOutputStream oos) throws IOException {
         oos.defaultWriteObject();
